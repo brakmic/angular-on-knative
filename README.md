@@ -17,7 +17,7 @@ The easiest way to install Knative is via Knative's [quickstart](https://knative
 
 Test your Knative installation by entering these commands:
 
-`kn version`
+`$ kn version`
 
 ```shell
 Version:      v1.3.1
@@ -31,7 +31,7 @@ Supported APIs:
   - eventing.knative.dev/v1 (knative-eventing v1.3.0)
 ```
 
-`kubectl get pods -n knative-serving`
+`$ kubectl get pods -n knative-serving`
 
 ```shell
 NAME                                     READY   STATUS      RESTARTS   AGE
@@ -45,7 +45,7 @@ net-kourier-controller-74dc74797-bp65n   1/1     Running     0          7h29m
 webhook-69fdbbf67d-wxwsg                 1/1     Running     0          7h30m
 ```
 
-`kubectl get pods -n knative-eventing`
+`$ kubectl get pods -n knative-eventing`
 
 ```shell
 NAME                                    READY   STATUS    RESTARTS   AGE
@@ -60,9 +60,9 @@ mt-broker-ingress-67959dc68f-8sf7c      1/1     Running   0          7h29m
 
 ### Deploying Angular app via Knative
 
-All that needs to be done is a single command:
+All that needs to be done is:
 
-`kubectl deploy -f ng-demo.yaml`
+`$ kubectl deploy -f ng-demo.yaml`
 
 The YAML file itself contains the [CRD](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) `Service` which is [defined by Knative](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#service).
 
@@ -85,9 +85,9 @@ spec:
             - containerPort: 80
 ```
 
-To check the deployment status of the app enter this command:
+To check the deployment status of the app:
 
-`kn services list`
+`$ kn services list`
 
 ```shell
 NAME      URL                                         LATEST       AGE   CONDITIONS   READY   REASON
@@ -96,9 +96,9 @@ ng-demo   http://ng-demo.default.127.0.0.1.sslip.io   ng-demo-v2   31m   3 OK / 
 
 Knative is not only defining all the basic stuff like Deyploment, Ingress, Service, but also setting up a local DNS.
 
-To get the K8s deployment enter this:
+To get the K8s deployment:
 
-`kubectl get deployments -n default`
+`$ kubectl get deployments -n default`
 
 ```shell
 NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
