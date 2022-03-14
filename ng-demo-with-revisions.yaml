@@ -1,0 +1,23 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: ng-demo
+spec:
+  template:
+    metadata:
+      # This is the name of our new "Revision," it must follow the convention {service-name}-{revision-name}
+      name: ng-demo-v3
+      annotations:
+        autoscaling.knative.dev/target: "2"
+    spec:
+      containers:
+        - image: brakmic/ng-demo:0.2
+          ports:
+            - containerPort: 80
+  traffic:
+  - tag: current
+    revisionName: ng-demo-v2
+    percent: 50
+  - tag: upcoming
+    revisionName: ng-demo-v3
+    percent: 50
