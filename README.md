@@ -74,7 +74,7 @@ metadata:
 spec:
   template:
     metadata:
-      # This is the name of our new "Revision," it must follow the convention {service-name}-{revision-name}
+      # This is the name of the revision. It must follow the convention {service-name}-{revision-name}
       name: ng-demo-v2
       annotations:
         autoscaling.knative.dev/target: "2"
