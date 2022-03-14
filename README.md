@@ -1,8 +1,8 @@
-# NgDemo with Knative
+# Angular apps with Knative
 
-This project contains an Angular app + a KNative YAML that can be used to deploy services on Kubernetes.
+This project contains an Angular app + a [Knative](https://knative.dev/) YAML that can be used to deploy services on Kubernetes without dealing with its complexities.
 
-Instead of using a myriad of different YAML files that describe various low-level aspects, we here use a single YAML file and let Knative do the rest.
+Instead of using a myriad of different YAML files that describe various low-level aspects like Deyploment, Ingress, Service and so on, we use a single YAML file and let Knative do the heavy lifting for us.
 
 ### Setup
 
