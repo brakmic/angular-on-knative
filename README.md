@@ -96,3 +96,17 @@ ng-demo   http://ng-demo.default.127.0.0.1.sslip.io   ng-demo-v2   31m   3 OK / 
 
 Knative is not only defining all the basic stuff like Deyploment, Ingress, Service, but also setting up a local DNS.
 
+To get the K8s deployment enter this:
+
+`kubectl get deployments -n default`
+
+```shell
+NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
+ng-demo-v1-deployment       0/0     0            0           42m
+ng-demo-v2-deployment       0/0     0            0           29m
+```
+
+As shown above, we can have many `revisions` that can also run in parallel and get assigned different ports. In your case you'll see only the second deployment as this is the only one available by default when running from this repo. 
+
+However, it's very easy to create a new revision. Just change the `name` in the `metadata` of the YAML file and do a `kubectl apply` again.
+
