@@ -110,3 +110,44 @@ As shown above, we can have many `revisions` that can also run in parallel and g
 
 However, it's very easy to create a new revision. Just change the `name` in the `metadata` of the YAML file and do a `kubectl apply` again.
 
+### Running multiple revisions in parallel
+
+With Knative we can also run multiple revisions art the same time and also split the traffic between them.
+
+```yaml
+traffic:
+  - tag: current
+    revisionName: ng-demo-v2
+    percent: 50
+  - tag: upcoming
+    revisionName: ng-demo-v3
+    percent: 50
+```
+
+Take the other YAML file called `ng-demo-with-revisions` and apply it with `kubectl`.
+
+Then execute this to get an overview of running services and routes:
+
+`$ watch -n 1 kubectl get pod,ksvc,configuration,revision,route`
+
+You should see two pods and deployments in a list similar to this:
+
+```shell
+Every 1.0s: kubectl get pod,ksvc,configuration,revision,route                                                                                                        BRAK9000
+NAME                                         READY   STATUS    RESTARTS   AGE
+pod/ng-demo-v2-deployment-59c4b8b784-zjhxp   2/2     Running   0          58s
+pod/ng-demo-v3-deployment-f4648c7cd-2spdl    2/2     Running   0          24s0
+NAME                                  URL                                         LATESTCREATED   LATESTREADY   READY   REASON
+service.serving.knative.dev/ng-demo   http://ng-demo.default.127.0.0.1.sslip.io   ng-demo-v3      ng-demo-v3    True
+
+NAME                                        LATESTCREATED   LATESTREADY   READY   REASON
+configuration.serving.knative.dev/ng-demo   ng-demo-v3      ng-demo-v3    True
+
+NAME                                      CONFIG NAME   K8S SERVICE NAME   GENERATION   READY   REASON                     ACTUAL REPLICAS   DESIRED REPLICAS
+revision.serving.knative.dev/ng-demo-v1   ng-demo                          1            False   ProgressDeadlineExceeded   0
+revision.serving.knative.dev/ng-demo-v2   ng-demo                          2            True                               1                 1
+revision.serving.knative.dev/ng-demo-v3   ng-demo                          3            True                               1                 1
+
+NAME                                URL                                         READY   REASON
+route.serving.knative.dev/ng-demo   http://ng-demo.default.127.0.0.1.sslip.io   True
+```
