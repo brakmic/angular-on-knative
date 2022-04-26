@@ -62,7 +62,7 @@ mt-broker-ingress-67959dc68f-8sf7c      1/1     Running   0          7h29m
 
 All that needs to be done is:
 
-`$ kubectl deploy -f ng-demo.yaml`
+`$ kubectl apply -f ng-demo.yaml`
 
 The YAML file itself contains the [CRD](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) `Service` which is [defined by Knative](https://github.com/knative/specs/blob/main/specs/serving/knative-api-specification-1.0.md#service).
 
